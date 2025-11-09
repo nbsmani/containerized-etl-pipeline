@@ -1,0 +1,29 @@
+services :
+  dbms :
+    image : postgres:14
+    environment:
+      POSTGRES_DB: global_data
+      POSTGRES_USER: sqluser
+      POSTGRES_PASSWORD: secret
+    volumes :
+      - pgdata:/var/lib/postgresql/data
+      - ./data:/imported_data
+    ports :
+      - "5432:5432"
+    networks :
+      - telnet
+  
+  dataimporter:
+    image: data_importer
+    depends_on:
+      - dbms
+    networks:
+      - telnet
+    command: ["01_paris_airbnb_listings.csv","sqluser","secret","dbms","5432","global_data","paris_airbnb_data"]
+  
+volumes :
+  pgdata :
+
+networks :
+  telnet :
+    driver : bridge
