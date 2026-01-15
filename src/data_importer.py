@@ -3,11 +3,6 @@ import sys
 import pandas as pd
 from sqlalchemy import create_engine,URL
 
-#input parameters
-#local dev purpose
-# input_file = "./data/paris_airbnb_listing/paris_airbnb_listings.csv"
-# docker_URL = "postgresql://sqluser:secret@192.168.1.92:5432/global_data"
-
 #input_variables
 
 input_file = sys.argv[1]
